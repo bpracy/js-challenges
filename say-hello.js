@@ -2,7 +2,7 @@
 // Pracy => "Hello, Pracy!"
 
 function getSum(name) {
-  console.log("Hello, "+name);
+  console.log("Hello, "+name +"\!");
 }
 
 getSum("Pracy");
