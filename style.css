@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #e5e5e5;
+}
+#app{
+    display: flex;
+    justify-content: center;
+}
+.todos_wrapper{
+  margin: 50px ;
+  width: 60%;
+}
+.todos_wrapper h1{
+    font-size: 28px;
+    margin-bottom: 24px;
+}
+.todos{
+    padding: 32px;   
+}
+.todo{
+     background: #fff;
+     margin-bottom: 10px;
+}
+.todo:nth-child(even){
+    background: #e5e5e5;  
+}
+.todo-title{
+    padding-top: 13px;
+    padding-left: 16px;
+    padding-bottom: 11px;
+    font-size: 18px;
+}
+.todo-date{
+    padding-left: 16px;
+    padding-bottom: 5px;
+    color: #bebebe;
+}
+.todo:hover{
+    cursor: pointer;
+    background: rgb(189, 245, 175);
+}
