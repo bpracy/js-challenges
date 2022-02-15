@@ -50,7 +50,7 @@ const getTodoHtml = (todo) => {
   // avoid using br tag, use padding or margins
   // optional: sort the todos by date
   // optional: show completed todos last
-  // optional: date format 24 - 01 - 2022, hint `${date.getFullYear()}`
+  // optional: date format 24 - 01 - 2022, hint `${date.getDate()} - ${date.getFullYear()}`
   return `
     <div class="todo">
       <div class="todo-title">${todo.title}</div>
