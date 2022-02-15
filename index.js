@@ -45,7 +45,11 @@ const todosList = [
   ];
 
 const getTodoHtml = (todo) => {
-  const date = new Date().toDateString();
+  const date = new Date().toDateString(); // This is very good. Can use try to get a random date in near future?
+  // and a random date in the past for completed tasks
+  // avoid using br tag, use padding or margins
+  // optional: sort the todos by date
+  // optional: show completed todos last
   return `
     <div class="todo">
       <div class="todo-title">${todo.title}</div>
