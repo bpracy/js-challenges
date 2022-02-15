@@ -1,44 +1,57 @@
+
+/* Ici Faut ajouter les pseudos ::before and ::after */
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 body{
+  /* changer le background a #E1EBFF */
     background: #e5e5e5;
 }
+/* Don't use id to style an element */
+/* #app doesn't need to be styled */
 #app{
     display: flex;
     justify-content: center;
 }
+/* preferably todos__wrapper */
 .todos_wrapper{
   margin: 50px ;
   width: 60%;
 }
+/* don't use compound selector, instead donner une classe a h1 et utilise la pour donner les styles */
 .todos_wrapper h1{
     font-size: 28px;
     margin-bottom: 24px;
 }
+/* donner un max-width de 424px selon le design */
 .todos{
     padding: 32px;   
 }
 .todo{
+  /* border radius missing */
      background: #fff;
      margin-bottom: 10px;
 }
-.todo:nth-child(even){
+.todo:nth-child(even){ /* this is very good */
+  /* wrong bcg color */
     background: #e5e5e5;  
 }
+/* preferablement todo__title est mieux que todo-title, apres uzokwiga ce qu'on apelle BEM */
 .todo-title{
     padding-top: 13px;
     padding-left: 16px;
     padding-bottom: 11px;
     font-size: 18px;
 }
+/* better todo__date */
 .todo-date{
     padding-left: 16px;
     padding-bottom: 5px;
     color: #bebebe;
 }
+/* move these styles to under the .todo styles */
 .todo:hover{
     cursor: pointer;
     background: rgb(189, 245, 175);
