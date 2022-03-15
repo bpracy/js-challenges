@@ -54,39 +54,50 @@ let btnAdd = document.querySelector('.button');
 btnAdd.onclick = function(){
   addTodo.style.display = "block";
 }
+let editTodo = document.querySelector('.editTodo__modal');
 window.onclick = function(event){
   if(event.target == addTodo){
     addTodo.style.display ="none";
   }
+  if(event.target == editTodo){
+    editTodo.style.display = 'none';
+  }
 }
 
 //edit todo
-let editTodo = document.querySelector('.editTodo__modal');
-const getEditTodoHtml = (todo)=>{
+// let editTodo = document.querySelector('.editTodo__modal');
+const getEditTodoHtml = (todo) => {
+  console.log('todo', todo)
   return `
   <div class="editTodo">
     <h1 class="heading">Edit todo</h1>
-    <input class="editTodo__title" type="text" name="title"  value=${todo.title}>
-    <input class="editTodo__date" type="text" name="date"  value=${todo.date}>
-    <input class="editTodo__des" name="description"  value=${todo.des}>
+    <input class="editTodo__title" type="text" name="title"  value="${todo.title}">
+    <input class="editTodo__date" type="text" name="date"  value="${todo.date}">
+    <textarea class="editTodo__des" name="description">${todo.des}</textarea>
     <div class="editTodo__check" >
-        <input type="checkbox" name="completed" placeholder="what to do..." value=${todo.completed}>
+        <input type="checkbox" name="completed" placeholder="what to do..." value="${todo.completed}">
         <label>Completed</label>
     </div>
   </div>
   `;
 }
-let editTodoHtml ="";
+let editTodoHtml = "";
 
 //click sur le todo
 /*ce click marche uniquement sur le premier todo, for of ou for each ne marche pas comme je voudrais, 
 une autre solution maybe? */
-const todobtn = document.querySelector('.todo');
-todobtn.addEventListener('click',function(todo){
-  editTodoHtml += getEditTodoHtml(todo);
-  editTodo.innerHTML = editTodoHtml;
-  editTodo.style.display = "block";
-  }); //le parametre 'todo' est undefined
+
+// const todobtn = document.querySelector('.todo');
+const allTodos = document.querySelectorAll('.todo');
+allTodos.forEach((todo, index) => {
+  todo.addEventListener('click', function () {
+    const currentTodo = todosList[index];
+    console.log('index', index)
+    editTodoHtml = getEditTodoHtml(currentTodo);
+    editTodo.innerHTML = editTodoHtml;
+    editTodo.style.display = 'block';
+  });
+});; //le parametre 'todo' est undefined
 
 /*ce paragraphe ne marche pas ,il marche soit pour le 'add todo' ou soit pour le 'edit todo' */
 /*window.onclick = function(event){
