@@ -14,7 +14,7 @@
     <div class="todos__wrapper" id="todos">
       <div class="heading">
         <h1 class="todos__wrapper__h1">Todos</h1>
-        <button class="button">+</button>
+        <button class="button openTodoModal">+</button>
       </div>
       <div class="todos"></div>
     </div>
@@ -22,16 +22,32 @@
   <section class="newTodo__modal">
     <div class="newTodo">
       <h1 class="heading">Add new todo</h1>
-      <input class="newTodo__title" type="text" name="title" placeholder="what to do..." value="">
-      <input class="newTodo__date" type="text" name="date" placeholder="when to do it..." value="">
-      <input class="newTodo__des" name="description" placeholder="description..." value="">
+      <input class="newTodo__title" type="text" name="title" placeholder="what to do...">
+      <input class="newTodo__date" type="text" name="date" placeholder="when to do it...">
+      <textarea class="newTodo__des" name="description" placeholder="description..."></textarea>
       <div class="newTodo__check" >
         <input type="checkbox" name="completed" placeholder="what to do..." value="">
         <label>Completed</label>
       </div>
+      <div>
+        <button id="saveNewTodo">Save</button>
+      </div>
     </div>    
   </section>
   <section class="editTodo__modal">
+    <div class="editTodo">
+      <h1 class="heading">Edit todo</h1>
+      <input class="editTodo__title" type="text" name="title"  value="">
+      <input class="editTodo__date" type="text" name="date"  value="">
+      <textarea class="editTodo__des" name="description"></textarea>
+      <div class="editTodo__check" >
+        <input type="checkbox" name="completed">
+        <label>Completed</label>
+      </div>
+      <div>
+        <button class="saveButton">Save</button>
+      </div>
+    </div>
   </section>
   <script src="index.js"></script>
 </body>

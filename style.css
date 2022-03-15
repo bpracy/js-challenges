@@ -1,18 +1,19 @@
-*{
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-body{
+
+body {
   background: #e1ebff; 
   display: flex;
   justify-content: center;
   font-family: 'Roboto', sans-serif;
 }
-.todos__wrapper{
-  margin: 50px ;
+.todos__wrapper {
+  margin: 50px;
 }
-.heading{
+.heading {
   width: 360px;
   height: 33px;
   display: flex;
@@ -23,7 +24,7 @@ body{
   font-size: 28px;
   margin-bottom: 26px;
 }
-.button{
+.button {
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -69,6 +70,9 @@ body{
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
+}
+.editTodoShow {
+  display: block;
 }
 .editTodo,
 .newTodo{

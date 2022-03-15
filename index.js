@@ -1,4 +1,5 @@
 // todo: create a todo list with js
+// code execution from top to bottom
 const todosList = [
   {
     "title": "delectus aut autem",
@@ -30,7 +31,7 @@ const todosList = [
     "des":"laboriosam mollitia et enim quasi adipisci quia provident illum",
     "date":"21-1-2022"
   },
-  ];
+];
 
 const getTodoHtml = (todo) => {
   return `
@@ -39,30 +40,80 @@ const getTodoHtml = (todo) => {
       <div class="todo__date">${todo.date}</div>
     </div>`;
 }
-// construire le html de tous les todos
-let todosHtml = "";
-for (const todo of todosList){
-  todosHtml += getTodoHtml(todo);
-}
-// inserer le html final dans le #todos
-const todos = document.querySelector('.todos');
-todos.innerHTML = todosHtml;
 
-//ouvrir addTodo
+const handleClick = (todo, index) => {
+  todo.addEventListener('click', function () {
+    const currentTodo = todosList[index];
+    editTodo.classList.add('editTodoShow');
+    editTodo.querySelector('.editTodo__title').value = currentTodo.title;
+    editTodo.querySelector('.editTodo__date').value = currentTodo.date;
+    editTodo.querySelector('.editTodo__des').value = currentTodo.des;
+    editTodo.querySelector('.editTodo__check input').checked = currentTodo.completed;
+    editTodo.querySelector('.saveButton').addEventListener('click', () => {
+      const newTodo = {
+        title: editTodo.querySelector('.editTodo__title').value,
+        date: editTodo.querySelector('.editTodo__date').value,
+        des: editTodo.querySelector('.editTodo__des').value,
+        completed: editTodo.querySelector('.editTodo__check input').checked,
+      };
+      todosList[index] = newTodo;
+      paintTodoHtml();
+      editTodo.classList.remove('editTodoShow');
+    });
+  });
+}
+
+// construire le html de tous les todos
+function paintTodoHtml() {
+  let todosHtml = '';
+  for (const todo of todosList) {
+    todosHtml += getTodoHtml(todo);
+  }
+  // inserer le html final dans le #todos
+  const todos = document.querySelector('.todos');
+  todos.innerHTML = todosHtml;
+
+  // const todobtn = document.querySelector('.todo');
+  const allTodos = document.querySelectorAll('.todo');
+  allTodos.forEach((todo, index) => {
+    handleClick(todo, index);
+  }); //le parametre 'todo' est undefined
+}
+
+paintTodoHtml()
+// ouvrir addTodo
+const btnAdd = document.querySelector('.openTodoModal');
 let addTodo= document.querySelector('.newTodo__modal');
-let btnAdd = document.querySelector('.button');
 btnAdd.onclick = function(){
-  addTodo.style.display = "block";
+  addTodo.classList.add('editTodoShow');
+  const saveNewTodo = document.getElementById('saveNewTodo');
+  saveNewTodo.addEventListener('click', () => {
+  newTodo()
+  });
 }
 let editTodo = document.querySelector('.editTodo__modal');
-window.onclick = function(event){
-  if(event.target == addTodo){
-    addTodo.style.display ="none";
+
+document.querySelector('.newTodo__modal').addEventListener('click', (event) => {
+  if (event.target == addTodo) {
+    addTodo.classList.remove('editTodoShow');
   }
-  if(event.target == editTodo){
-    editTodo.style.display = 'none';
+});
+document.querySelector('.editTodo__modal').addEventListener('click', (event) => {
+  if (event.target == editTodo) {
+    editTodo.classList.remove('editTodoShow');
   }
-}
+});
+
+// ! pas good practive
+// window.onclick = function(event){
+//   console.log(`clicked...`, event.target)
+//   console.log(`clicked... 1`, event.target == addTodo)
+//   console.log(`clicked... 2`, event.target === addTodo)
+//   if (event.target == addTodo || event.target == editTodo) {
+//     addTodo.classList.remove('editTodoShow');
+//     editTodo.classList.remove('editTodoShow');
+//   }
+// }
 
 //edit todo
 const getEditTodoHtml = (todo) => {
@@ -80,22 +131,10 @@ const getEditTodoHtml = (todo) => {
   </div>
   `;
 }
-let editTodoHtml = "";
 
 //click sur le todo
 /*ce click marche uniquement sur le premier todo, for of ou for each ne marche pas comme je voudrais, 
 une autre solution maybe? */
-
-// const todobtn = document.querySelector('.todo');
-const allTodos = document.querySelectorAll('.todo');
-allTodos.forEach((todo, index) => {
-  todo.addEventListener('click', function () {
-    const currentTodo = todosList[index];
-    editTodoHtml = getEditTodoHtml(currentTodo);
-    editTodo.innerHTML = editTodoHtml;
-    editTodo.style.display = 'block';
-  });
-});; //le parametre 'todo' est undefined
 
 /*ce paragraphe ne marche pas ,il marche soit pour le 'add todo' ou soit pour le 'edit todo' */
 /*window.onclick = function(event){
@@ -106,17 +145,36 @@ allTodos.forEach((todo, index) => {
 */ 
 
 // add todo
-//brouillon
-/*function newTodo(){
-  let title = document.getElementsByClassName("newTodo__title").value;
-  let date = document.getElementsByClassName("newTodo__date").value;
-  let des= document.getElementsByClassName("newTodo__date").value;
-  let completed = document.getElementsByClassName("newTodo__date").value;
-  let newTodo={
-      "title":title,
-      "completed":completed,
-      "des":des,
-      "date":date
+// brouillon
+function newTodo() {
+  const title = document.querySelector('.newTodo__title').value;
+  const date = document.querySelector('.newTodo__date').value;
+  const des = document.querySelector('.newTodo__des').value;
+  const completed = document.querySelector('.newTodo__check input').checked;
+
+  // todo: validation
+
+  // const newTodo = {
+  //   title: title,
+  //   completed: completed,
+  //   des: des,
+  //   date: date,
+  // };
+  
+  const newTodo = {
+    title,
+    completed,
+    des,
+    date,
+  };
+
+  if (!newTodo.title) {
+    return console.warn('we need a title....');
   }
-  todosList.unshift(newTodo),
-}*/
+  if (!newTodo.des) {
+    return console.warn('we need a des....');
+  }
+  todosList.unshift(newTodo);
+  paintTodoHtml()
+  addTodo.classList.remove('editTodoShow');
+}
