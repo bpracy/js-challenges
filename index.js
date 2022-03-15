@@ -65,7 +65,6 @@ window.onclick = function(event){
 }
 
 //edit todo
-// let editTodo = document.querySelector('.editTodo__modal');
 const getEditTodoHtml = (todo) => {
   console.log('todo', todo)
   return `
@@ -92,8 +91,7 @@ const allTodos = document.querySelectorAll('.todo');
 allTodos.forEach((todo, index) => {
   todo.addEventListener('click', function () {
     const currentTodo = todosList[index];
-    console.log('index', index)
-    editTodoHtml = getEditTodoHtml(currentTodo);
+    editTodoHtml += getEditTodoHtml(currentTodo);
     editTodo.innerHTML = editTodoHtml;
     editTodo.style.display = 'block';
   });
