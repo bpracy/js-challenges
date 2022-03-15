@@ -26,7 +26,7 @@ const todosList = [
   },
   {
     "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-    "completed": false,
+    "completed": true,
     "des":"laboriosam mollitia et enim quasi adipisci quia provident illum",
     "date":"21-1-2022"
   },
@@ -74,7 +74,7 @@ const getEditTodoHtml = (todo) => {
     <input class="editTodo__date" type="text" name="date"  value="${todo.date}">
     <textarea class="editTodo__des" name="description">${todo.des}</textarea>
     <div class="editTodo__check" >
-        <input type="checkbox" name="completed" placeholder="what to do..." value="${todo.completed}">
+        <input type="checkbox" name="completed" ${todo.completed && 'checked'}>
         <label>Completed</label>
     </div>
   </div>
@@ -91,7 +91,7 @@ const allTodos = document.querySelectorAll('.todo');
 allTodos.forEach((todo, index) => {
   todo.addEventListener('click', function () {
     const currentTodo = todosList[index];
-    editTodoHtml += getEditTodoHtml(currentTodo);
+    editTodoHtml = getEditTodoHtml(currentTodo);
     editTodo.innerHTML = editTodoHtml;
     editTodo.style.display = 'block';
   });
